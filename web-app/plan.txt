@@ -1,0 +1,280 @@
+Take images in the references directory as refrences.
+check implemented code in the app folder.
+check implemented code in the components folder.
+check implemented code in the lib folder.
+in lib check type.ts specifically.
+2. Core Features Implementation
+2.1 Checklist Cards Tab
+
+Create a new page: /app/checklists/page.tsx
+Implement components:
+
+ChecklistCard: Individual checklist card
+ChecklistGrid: Grid layout for checklist cards
+TaskItem: Individual task within a checklist
+
+
+Use shadcn UI components:
+
+Card component for checklist cards
+Checkbox component for tasks
+Dialog component for adding/editing checklists
+
+
+Implement drag-and-drop functionality:
+
+Use react-beautiful-dnd library
+Create custom hooks for drag-and-drop logic
+
+
+Add color-coding options:
+
+Implement a color picker using shadcn UI's Popover component
+Store color preferences in state management solution
+
+
+Implement sub-tasks:
+
+Extend TaskItem component to support nested tasks
+Use shadcn UI's Collapsible component for sub-task lists
+
+
+Add progress tracking:
+
+Create a custom Progress component using Tailwind CSS
+Update progress dynamically based on completed tasks
+
+
+Implement due dates:
+
+Use shadcn UI's DatePicker component
+Add date filtering and sorting options
+
+
+
+2.2 Monthly Calendar Tab
+
+Create a new page: /app/calendar/page.tsx
+Implement calendar components:
+
+MonthView: Main calendar grid
+WeekView: Alternative week view
+DayCell: Individual day cell in the calendar
+
+
+Use a calendar library like react-big-calendar for the base implementation
+Integrate tasks from checklists:
+
+Fetch tasks from state management solution
+Render tasks on their due dates using custom DayCell component
+
+
+Implement color-coding:
+
+Use consistent colors from checklist categories
+Create a TaskIndicator component for compact task display
+
+
+Add interaction features:
+
+Implement click handlers for adding/editing tasks
+Use shadcn UI's Dialog component for task details
+
+
+Create toggle for month/week views:
+
+Use shadcn UI's ToggleGroup component
+Implement view switching logic
+
+
+
+2.3 Daily Notes Tab
+
+Create a new page: /app/daily-notes/page.tsx
+Implement components:
+
+DailyNoteEditor: Main component for note-taking
+TaskList: Component to display and manage daily tasks
+HabitTracker: Component for tracking daily habits
+
+
+Use shadcn UI components:
+
+Textarea component for note-taking
+Checkbox component for tasks and habits
+Tabs component for organizing different sections
+
+
+Implement auto-creation of daily notes:
+
+Create a utility function to generate empty note structure
+Use Next.js API routes for server-side logic if needed
+
+
+Integrate with calendar:
+
+Implement date navigation using shadcn UI's DatePicker
+Fetch and display relevant tasks for the selected date
+
+
+Add image/attachment support:
+
+Use shadcn UI's FileInput component
+Implement file upload logic (consider using a service like AWS S3)
+
+
+Create habit tracker:
+
+Design a grid-based habit tracker using Tailwind CSS
+Implement streak counting and visual feedback
+
+
+
+2.4 Existing Tabs Improvement
+
+Review and update "Add Manually" tab:
+
+Ensure consistency with new design system
+Optimize form layout and validation
+
+
+Enhance "Uploading Markdown" tab:
+
+Improve markdown preview functionality
+Add support for custom markdown extensions if needed
+
+
+
+3. UI/UX Enhancements
+
+Develop a cohesive design system:
+
+Create a theme.js file for consistent color definitions
+Define typography scales in Tailwind config
+Create a components.json file for shadcn UI customization
+
+
+Implement responsive design:
+
+Use Tailwind's responsive prefixes consistently
+Create custom hooks for handling responsive behaviors
+
+
+Add dark mode:
+
+Configure Tailwind for dark mode
+Create a ThemeProvider component for managing theme state
+
+
+Implement smooth transitions:
+
+Use Framer Motion for page transitions
+Add micro-interactions for improved user feedback
+
+
+Create a user-friendly navigation system:
+
+Implement a sidebar navigation using shadcn UI's Sheet component
+Add breadcrumbs for improved navigation context
+
+
+
+4. Additional Features
+
+Implement search functionality:
+
+Create a global search component using shadcn UI's Command component
+Implement search logic across all data types (tasks, notes, etc.)
+
+
+Add data synchronization:
+
+Implement real-time database sync (e.g., using Firebase or Supabase)
+Create a sync indicator component
+
+
+Develop a customizable dashboard:
+
+Create a grid-based layout for widgets
+Implement drag-and-drop for widget positioning
+
+
+Build a notification system:
+
+Use Web Push API for browser notifications
+Create a Notification Center component
+
+
+Implement analytics and progress tracking:
+
+Use a charting library like recharts
+Create custom visualizations for task completion, habit streaks, etc.
+
+
+
+5. Testing and Refinement
+
+Set up testing environment:
+
+Configure Jest and React Testing Library
+Write unit tests for critical components and utilities
+
+
+Implement end-to-end testing:
+
+Set up Cypress for E2E tests
+Create test scenarios covering main user flows
+
+
+Perform accessibility audit:
+
+Use tools like axe-core for automated accessibility testing
+Conduct manual keyboard navigation testing
+
+
+Optimize performance:
+
+Use Lighthouse for performance auditing
+Implement code splitting and lazy loading where appropriate
+
+
+
+6. Documentation and Help
+
+Create user documentation:
+
+Write markdown-based user guides
+Generate API documentation using TypeDoc
+
+
+Implement in-app help:
+
+Create a HelpCenter component
+Add contextual help using shadcn UI's Tooltip component
+
+
+Design onboarding process:
+
+Create a multi-step onboarding flow using shadcn UI's Dialog component
+Implement feature tours using a library like react-joyride
+
+
+
+7. Deployment and Maintenance
+
+Set up CI/CD pipeline:
+
+Configure GitHub Actions for automated testing and deployment
+Set up staging and production environments
+
+
+Implement error tracking:
+
+Integrate an error tracking service (e.g., Sentry)
+Create custom error boundaries for graceful error handling
+
+
+Plan for future updates:
+
+Set up a system for gathering user feedback
+Create a roadmap for future feature development
