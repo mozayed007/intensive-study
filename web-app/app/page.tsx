@@ -1,75 +1,123 @@
-  "use client"
-  import React, { useState, useEffect } from 'react'
-  import { useTheme } from "next-themes"
-  import { Button } from "@/components/ui/button"
-  import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-  import { Switch } from "@/components/ui/switch"
-  import { Sun, Moon } from "lucide-react"
-  import { SubjectForm } from '@/components/SubjectForm'
-  import { FileUpload } from '@/components/FileUpload'
-  import { ChecklistGrid } from '@/components/checklist/checklist-grid'
-  import { MonthlyCalendar } from '@/components/MonthlyCalendar'
-  import { Timetable } from '@/components/Timetable'
-  import { DailyPlanner } from '@/components/DailyPlanner'
-  import { Pomodoro } from '@/components/Pomodoro'
-  import { useSubjects } from '@/lib/hooks/use-subjects'
+"use client"
+import React from 'react'
+import { useTheme } from "next-themes"
+import { Button } from "@/components/ui/button"
+import { Sun, Moon } from "lucide-react"
+import Link from 'next/link'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-  export default function Home() {
-    const [mounted, setMounted] = useState(false)
-    const { theme, setTheme } = useTheme()
-    const { subjects, addSubject, updateSubject, deleteSubject } = useSubjects()
+export default function Home() {
+  const { theme, setTheme } = useTheme()
 
-    useEffect(() => {
-      setMounted(true)
-    }, [])
-
-    if (!mounted) return null
-
-    return (
-      <main className="min-h-screen p-24">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">Subject Study Planner</h1>
-          <div className="flex items-center space-x-2">
+  return (
+    <main className="min-h-screen p-8">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold">Subject Study Planner</h1>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Switch
-              checked={theme === "dark"}
-              onCheckedChange={() => setTheme(theme === "light" ? "dark" : "light")}
-            />
-            <Moon className="h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          </div>
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
         </div>
-        <Tabs defaultValue="checklists" className="w-full">
-          <TabsList>
-            <TabsTrigger value="checklists">Checklists</TabsTrigger>
-            <TabsTrigger value="add-subject">Add Subject</TabsTrigger>
-            <TabsTrigger value="upload-files">Upload Files</TabsTrigger>
-            <TabsTrigger value="calendar">Calendar</TabsTrigger>
-            <TabsTrigger value="timetable">Timetable</TabsTrigger>
-            <TabsTrigger value="planner">Daily Planner</TabsTrigger>
-            <TabsTrigger value="pomodoro">Pomodoro</TabsTrigger>
-          </TabsList>
-          <TabsContent value="checklists">
-            <ChecklistGrid subjects={subjects} updateSubject={updateSubject} deleteSubject={deleteSubject} />
-          </TabsContent>
-          <TabsContent value="add-subject">
-            <SubjectForm onSubmit={addSubject} />
-          </TabsContent>
-          <TabsContent value="upload-files">
-            <FileUpload onSubmit={addSubject} />
-          </TabsContent>
-          <TabsContent value="calendar" className="h-[calc(100vh-120px)]">
-            <MonthlyCalendar subjects={subjects} />
-          </TabsContent>
-          <TabsContent value="timetable">
-            <Timetable />
-          </TabsContent>
-          <TabsContent value="planner">
-            <DailyPlanner />
-          </TabsContent>
-          <TabsContent value="pomodoro">
-            <Pomodoro />
-          </TabsContent>
-        </Tabs>
-      </main>
-    )
-  }
+      </div>
+      
+      <Tabs defaultValue="home" className="w-full mb-8">
+        <TabsList className="grid w-full grid-cols-5 rounded-full bg-muted p-1">
+          <TabsTrigger value="home" asChild className="rounded-full">
+            <Link href="/" className="w-full rounded-full data-[state=active]:text-foreground">Home</Link>
+          </TabsTrigger>
+          <TabsTrigger value="checklists" asChild className="rounded-full">
+            <Link href="/checklists" className="w-full rounded-full data-[state=active]:text-foreground">Checklists</Link>
+          </TabsTrigger>
+          <TabsTrigger value="calendar" asChild className="rounded-full">
+            <Link href="/calendar" className="w-full rounded-full data-[state=active]:text-foreground">Calendar</Link>
+          </TabsTrigger>
+          <TabsTrigger value="timetable" asChild className="rounded-full">
+            <Link href="/timetable" className="w-full rounded-full data-[state=active]:text-foreground">Timetable</Link>
+          </TabsTrigger>
+          <TabsTrigger value="planner" asChild className="rounded-full">
+            <Link href="/planner" className="w-full rounded-full data-[state=active]:text-foreground">Planner</Link>
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Checklists</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Manage your study topics and track your progress.</p>
+          </CardContent>
+          <CardFooter>
+            <Link href="/checklists">
+              <Button>Go to Checklists</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Calendar</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Plan your study schedule and view upcoming tasks.</p>
+          </CardContent>
+          <CardFooter>
+            <Link href="/calendar">
+              <Button>Open Calendar</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Timetable</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Organize your daily study routine.</p>
+          </CardContent>
+          <CardFooter>
+            <Link href="/timetable">
+              <Button>View Timetable</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Daily Planner & Notes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Plan your day and take study notes.</p>
+          </CardContent>
+          <CardFooter>
+            <Link href="/planner">
+              <Button>Open Planner</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Pomodoro</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Use the Pomodoro technique for focused study sessions.</p>
+          </CardContent>
+          <CardFooter>
+            <Link href="/pomodoro">
+              <Button>Start Pomodoro</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+      </div>
+    </main>
+  )
+}

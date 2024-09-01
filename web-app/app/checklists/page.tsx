@@ -7,15 +7,18 @@ import { ChecklistGrid } from "@/components/checklist/checklist-grid"
 import { useSubjects } from "@/lib/hooks/use-subjects"
 import { SubjectForm } from "@/components/SubjectForm"
 import { FileUpload } from "@/components/FileUpload"
+import Link from 'next/link'
 
 export default function ChecklistsPage() {
   const { subjects, addSubject, updateSubject, deleteSubject } = useSubjects()
 
   return (
     <div className="container mx-auto p-4">
-      <Button variant="ghost" className="mb-4">
-        <ArrowLeftIcon className="mr-2 h-4 w-4" /> Back
-      </Button>
+      <Link href="/">
+        <Button variant="ghost" className="mb-4">
+          <ArrowLeftIcon className="mr-2 h-4 w-4" /> Back to Home
+        </Button>
+      </Link>
       <h1 className="text-2xl font-bold mb-4">Checklists</h1>
       
       <Tabs defaultValue="view">
